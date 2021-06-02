@@ -30,7 +30,7 @@ async def on_message(message):
     if message.author == client.user:
         return
     if message.content == '!days':
-        f_date = date(2019, 10, 2)
+        f_date = date(2019, 10, 15)
         
         l_date = date.today()
         delta = l_date - f_date
