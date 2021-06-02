@@ -4,6 +4,7 @@ import discord
 from discord.utils import get
 
 from dotenv import load_dotenv
+from datetime import date
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -24,6 +25,16 @@ async def on_voice_state_update(member, before, after):
             role = get(member.guild.roles, name="vc")
             await member.add_roles(role)
 
-
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+    if message.content == '!days':
+        f_date = date(2019, 10, 2)
+        
+        l_date = date.today()
+        delta = l_date - f_date
+        msg = 'It has been ' + str(delta.days) + ' days since PL news.'
+        await message.channel.send(msg)
 
 client.run(TOKEN)
